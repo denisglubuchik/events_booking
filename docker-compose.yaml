@@ -1,0 +1,20 @@
+version: '2.3'
+services:
+  postgresql:
+    container_name: postgres-events-booking
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: sqluser
+      POSTGRES_PASSWORD: sqlpass
+      POSTGRES_DB: psql_db
+    volumes:
+#      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest
+    container_name: redis-events-booking
+    ports:
+      - "6379:6379"
