@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for ticket in tickets %}
+        <div>
+            {{ ticket.title }}
+            {{ ticket.event_type }}
+        </div>
+    {% endfor %}
+{% endblock %}

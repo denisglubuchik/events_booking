@@ -1,20 +1,56 @@
-version: '2.3'
+version: '3.7'
 services:
-  postgresql:
-    container_name: postgres-events-booking
+  db:
+    container_name: postgres_events_booking
     image: postgres:latest
-    environment:
-      POSTGRES_USER: sqluser
-      POSTGRES_PASSWORD: sqlpass
-      POSTGRES_DB: psql_db
+    env_file:
+      - .env-non-dev
     volumes:
-#      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgresql/data:/var/lib/postgresql/data
+      - postgresdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
   redis:
     image: redis:latest
-    container_name: redis-events-booking
+    container_name: redis_events_booking
     ports:
       - "6379:6379"
+
+  events_booking:
+    build:
+      context: .
+    container_name: events_booking_app
+    env_file:
+      - .env-non-dev
+    depends_on:
+      - db
+      - redis
+    command: ["/events_booking/docker/app.sh"]
+#    command: sh -c "alembic upgrade head && gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+    ports:
+      - 7777:8000
+
+  celery:
+    build:
+      context: .
+    container_name: celery_events_booking
+    command: ["/events_booking/docker/celery.sh", "celery"]
+    env_file:
+      - .env-non-dev
+    depends_on:
+      - redis
+
+  flower:
+    build:
+      context: .
+    container_name: flower_events_booking
+    command: [ "/events_booking/docker/celery.sh", "flower" ]
+    env_file:
+      - .env-non-dev
+    ports:
+      - 5555:5555
+    depends_on:
+      - redis
+
+volumes:
+  postgresdata:

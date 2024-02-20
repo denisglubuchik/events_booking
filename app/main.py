@@ -9,11 +9,14 @@ from app.users.router import router as users_router
 from app.events.router import router as events_router
 from app.tickets.router import router as tickets_router
 
+from app.pages.router import router as pages_router
+
 app = FastAPI()
 
 app.include_router(users_router)
 app.include_router(events_router)
 app.include_router(tickets_router)
+app.include_router(pages_router)
 
 
 @app.on_event("startup")

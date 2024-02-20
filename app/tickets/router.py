@@ -27,5 +27,5 @@ async def create_ticket(event_id: int, user: Users = Depends(current_user)):
     new_ticket = await TicketsDAO.create_new_ticket(event_id=event_id, user_id=user.id)
     ticket_dict = parse_obj_as(STickets, new_ticket).dict()
 
-    send_ticket_confirmation_email.delay(ticket_dict, user.email)
+    # send_ticket_confirmation_email.delay(ticket_dict, user.email)
     return ticket_dict
