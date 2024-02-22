@@ -20,6 +20,7 @@ router = APIRouter(
 
 
 current_user = fastapi_users.current_user()
+authenticated_user = fastapi_users.current_user(optional=True)
 
 
 @router.get("/me")

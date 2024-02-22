@@ -3,6 +3,7 @@ from starlette.templating import Jinja2Templates
 
 from app.events.router import get_events
 from app.tickets.router import get_tickets
+from app.users.router import authenticated_user
 
 router = APIRouter(
     prefix="/pages",
@@ -13,10 +14,19 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 @router.get("/events")
-async def get_events_page(request: Request, events=Depends(get_events)):
-    return templates.TemplateResponse("events/events.html", {"request": request, "events": events})
+async def get_events_page(
+        request: Request,
+        events=Depends(get_events),
+        user=Depends(authenticated_user)
+):
+    return templates.TemplateResponse("events/events.html", {"request": request, "events": events, "user": user})
 
 
 @router.get("/tickets")
-async def get_tickets_page(request: Request, tickets=Depends(get_tickets)):
-    return templates.TemplateResponse("tickets/tickets.html", {"request": request, "tickets": tickets})
+async def get_tickets_page(
+        request: Request,
+        tickets=Depends(get_tickets),
+        user=Depends(authenticated_user)
+):
+    return templates.TemplateResponse("tickets/tickets.html", {"request": request, "tickets": tickets, "user": user})
+

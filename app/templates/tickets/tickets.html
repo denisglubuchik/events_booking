@@ -3,8 +3,8 @@
 {% block content %}
     {% for ticket in tickets %}
         <div>
-            {{ ticket.title }}
-            {{ ticket.event_type }}
+            <span>{{ ticket.title }}</span><br>
+            <span>{{ ticket.event_type }}</span>
         </div>
     {% endfor %}
 {% endblock %}

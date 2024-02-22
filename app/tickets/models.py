@@ -10,7 +10,7 @@ class Tickets(Base):
 
     id = Column(Integer, primary_key=True)
     event_id = Column(ForeignKey("events.id"))
-    event_type = Column(Enum(EventTypeEnum), nullable=False)
+    event_type = Column(String, nullable=False)
     title = Column(String, nullable=False)
     user_id = Column(ForeignKey("users.id"))
     location = Column(String, nullable=False)
