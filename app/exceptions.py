@@ -15,6 +15,16 @@ class NoTicketsLeftException(TicketException):
     detail = "No tickets left"
 
 
+class TicketDoesntBelongToUserException(TicketException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "Ticket doesn't belong to you"
+
+
+class TicketDoesntExistException(TicketException):
+    status_code = status.HTTP_404_NOT_FOUND
+    detail = "Ticket doesnt exist"
+
+
 class EventHasPassedException(TicketException):
     status_code = status.HTTP_400_BAD_REQUEST
     detail = "Event has passed"

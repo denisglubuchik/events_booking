@@ -10,7 +10,7 @@
                 method: 'POST',
             }).then(response => {
                 if (response.status === 204) {
-                    window.location.href = "events"
+                    window.location.href = "/pages/events"
                 }
             });
         }
@@ -21,16 +21,16 @@
 <body>
     <nav>
         <ul>
-            <li>Events Booking</li>
+            <li><a href="/pages/events">Events Booking</a></li>
         </ul>
         <ul>
             {% if user %}
-                 <li><a href="tickets">Мои билеты</a></li>
+                 <li><a href="/pages/tickets">Мои билеты</a></li>
                  <li>
                     <button onclick="logoutUser()">Выйти</button>
                  </li>
             {% else %}
-                 <li><a href="login">Войти</a></li>
+                 <li><a href="/pages/login">Войти</a></li>
             {% endif %}
         </ul>
     </nav>

@@ -6,5 +6,6 @@
         {{ event.description }}
         {{ event.event_type }}
         {{ event.price}}
+        <a href="{{ url_for('get_new_ticket_page', event_id=event.id) }}">Забронировать билет на мероприятие</a>
     </div>
 {% endblock %}

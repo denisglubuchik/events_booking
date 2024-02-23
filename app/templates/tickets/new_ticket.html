@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        async function new_ticket() {
+            const wrongSpan = document.getElementById("wrong_span");
+            wrongSpan.textContent = "";
+
+            const url = "http://localhost:8000/tickets";
+            const event_id = parseInt(document.getElementById("event_id").innerHTML)
+
+            await fetch(`${url}?event_id=${event_id}`, {method: 'POST'}).then(response => {
+                if (response.status === 200) {
+                    window.location.href = "/pages/tickets"
+                } else {
+                    wrongSpan.textContent = "Что-то пошло не так";
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <p id="event_id">{{ event.id }}</p>
+        {{ event.title}}
+        {{ event.description }}
+        {{ event.location }}
+        {{ event.event_type }}
+        {{ event.price }}
+        {{ event.date }}
+        <button onclick="new_ticket()">Забронировать билет</button>
+        <span id="wrong_span" ></span>
+    </div>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
     {% for ticket in tickets %}
         <div>
-            <span>{{ ticket.title }}</span><br>
+            <a href="{{ url_for('get_ticket_page', ticket_id=ticket.id) }}">{{ ticket.title }}</a>
             <span>{{ ticket.event_type }}</span>
         </div>
     {% endfor %}

@@ -13,7 +13,7 @@
                 body: JSON.stringify({email: email, password: password, username: "string", role_id: 0}),
             }).then(response => {
                 if (response.status === 201) {
-                    window.location.href = "login"
+                    window.location.href = "/pages/login"
                 }
             });
         }
@@ -37,7 +37,7 @@
         <button onclick="registerUser()">Зарегистрироваться</button>
         <span>
             Уже зарегистрированы?
-            <a href="login">
+            <a href="/pages/login">
                 Войти
             </a>
         </span>
