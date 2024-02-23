@@ -41,3 +41,12 @@ async def create_ticket(event_id: int, user: Users = Depends(current_user)):
 
     # send_ticket_confirmation_email.delay(ticket_dict, user.email)
     return ticket_dict
+
+
+@router.delete("/{ticket_id}")
+async def delete_ticket(ticket_id: int, user: Users = Depends(current_user)):
+    ticket = await TicketsDAO.find_by_id(model_id=ticket_id)
+    if ticket.user_id != user.id:
+        raise TicketDoesntBelongToUserException
+    else:
+        await TicketsDAO.delete_by_id(model_id=ticket_id)

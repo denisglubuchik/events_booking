@@ -40,15 +40,6 @@ async def get_tickets_page(
     return templates.TemplateResponse("tickets/tickets.html", {"request": request, "tickets": tickets, "user": user})
 
 
-@router.get("/tickets/{ticket_id}")
-async def get_ticket_page(
-        request: Request,
-        ticket=Depends(get_ticket),
-        user=Depends(current_user)
-):
-    return templates.TemplateResponse("tickets/ticket.html", {"request": request, "ticket": ticket, "user": user})
-
-
 @router.get("/{event_id}/new_ticket")
 async def get_new_ticket_page(
         request: Request,

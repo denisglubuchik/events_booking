@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         async function logoutUser() {
             const url = "http://localhost:8000/users/auth/logout";
@@ -19,20 +20,23 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/pages/events">Events Booking</a></li>
-        </ul>
-        <ul>
-            {% if user %}
-                 <li><a href="/pages/tickets">Мои билеты</a></li>
-                 <li>
-                    <button onclick="logoutUser()">Выйти</button>
-                 </li>
-            {% else %}
-                 <li><a href="/pages/login">Войти</a></li>
-            {% endif %}
-        </ul>
+    <nav class="mb-10">
+        <div class="flex justify-between px-8 py-3 text-2xl">
+            <ul>
+                <li><a href="/pages/events">Events Booking</a></li>
+            </ul>
+            <ul class="flex gap-x-5">
+                {% if user %}
+                     <li><a href="/pages/tickets">Мои билеты</a></li>
+                     <li>
+                        <button onclick="logoutUser()">Выйти</button>
+                     </li>
+                {% else %}
+                     <li><a href="/pages/login">Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <hr/>
     </nav>
 {% block content %}{% endblock %}
 </body>

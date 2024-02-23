@@ -21,15 +21,22 @@
 {% endblock %}
 
 {% block content %}
+<p style="display: none" id="event_id">{{ event.id }}</p>
+<div class="flex flex-col items-center">
+    <div class="flex justify-center mb-10 text-3xl">
+        Бронь билета на&nbsp;<span class="font-bold">{{ event.title }}</span>
+    </div>
+
+    <div class="mb-5">
+        <div class="mb-2 pl-1">Тип мероприятия: {{ event.event_type }}</div>
+        <div class="mb-2 pl-1">Место проведения: {{ event.location }}</div>
+        <div class="mb-2 pl-1">Цена: {{ event.price }}</div>
+        <div class="mb-2 pl-1">Дата проведения: {{ event.date }}</div>
+    </div>
+
     <div>
-        <p id="event_id">{{ event.id }}</p>
-        {{ event.title}}
-        {{ event.description }}
-        {{ event.location }}
-        {{ event.event_type }}
-        {{ event.price }}
-        {{ event.date }}
-        <button onclick="new_ticket()">Забронировать билет</button>
+        <button class="text-lg bg-yellow-400 px-3 py-1 rounded-3xl mb-3" onclick="new_ticket()">Забронировать билет</button>
         <span id="wrong_span" ></span>
     </div>
+</div>
 {% endblock %}

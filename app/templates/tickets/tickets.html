@@ -1,10 +1,43 @@
 {% extends "base.html" %}
 
+{% block head %}
+<script>
+    async function delete_ticket(id) {
+
+        const url = "http://localhost:8000/tickets";
+
+        await fetch(`${url}/${id}`, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.status === 200) {
+                window.location.href = "/pages/tickets"
+            }
+        });
+    }
+</script>
+{% endblock %}
+
 {% block content %}
+<div class="flex justify-center mb-10 text-3xl">
+    Мои билеты
+</div>
+<div class="flex flex-col items-center">
     {% for ticket in tickets %}
-        <div>
-            <a href="{{ url_for('get_ticket_page', ticket_id=ticket.id) }}">{{ ticket.title }}</a>
-            <span>{{ ticket.event_type }}</span>
+        <div class="mb-5">
+            <div class="text-2xl font-bold">
+                <a href="{{ url_for('get_event_page', event_id=ticket.event_id) }}">{{ ticket.title }}</a>
+            </div>
+            <div class="flex justify-top flex-col mb-3">
+                    <span>Место проведения: {{ ticket.location }}</span>
+                    <span>Дата проведения: {{ ticket.date }}</span>
+                    <span class="font-bold text-xl">Цена: {{ ticket.price }}</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div><button class="text-lg bg-red-400 px-3 py-1 rounded-3xl mb-4" onclick="delete_ticket('{{ ticket.id }}')">
+                    Отменить бронь
+                </button></div>
+            </div>
         </div>
     {% endfor %}
+</div>
 {% endblock %}
