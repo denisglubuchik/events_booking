@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request, Depends
 from starlette.templating import Jinja2Templates
 
-from app.events.router import get_events, get_event
-from app.tickets.router import get_tickets, get_ticket
+from app.events.router import get_events, get_event, get_events_by_location
+from app.tickets.router import get_tickets
 from app.users.router import authenticated_user, current_user
 
 router = APIRouter(
@@ -22,7 +22,17 @@ async def get_events_page(
     return templates.TemplateResponse("events/events.html", {"request": request, "events": events, "user": user})
 
 
-@router.get("/events/{event_id}")
+@router.get("/events/{location}")
+async def get_events_by_location_page(
+        request: Request,
+        location: str,
+        events=Depends(get_events_by_location),
+):
+    return templates.TemplateResponse("events/events.html", {"request": request, "events": events, "location": location})
+
+
+
+@router.get("/events/event/{event_id}")
 async def get_event_page(
         request: Request,
         event=Depends(get_event),

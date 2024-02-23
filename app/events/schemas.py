@@ -22,3 +22,17 @@ class SEvents(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class SEventsRead(BaseModel):
+    id: int
+    title: str
+    description: str
+    location: str
+    event_type: str
+    price: int
+    date: date
+    people_amount: int
+
+    class Config:
+        from_attributes = True
