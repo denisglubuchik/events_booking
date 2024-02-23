@@ -5,7 +5,10 @@
         <div class="flex justify-center mb-10 text-3xl">
         Мероприятие&nbsp;<span class="font-bold">{{ event.title }}</span>
         </div>
-        <div class="mb-5">
+        <div class="flex gap-x-20 mb-5">
+            <div>
+                <img src="{{ url_for('static', path='images/events/' + event.id|string + '.webp') }}" alt="Event" width="400">
+            </div>
             <div>
                 <div class="mb-2 pl-1">Описание: {{ event.description }}</div>
                 <div class="mb-2 pl-1">Тип мероприятия: {{ event.event_type }}</div>

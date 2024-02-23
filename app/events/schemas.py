@@ -1,9 +1,9 @@
-import enum
+from enum import Enum
 from datetime import date
 from pydantic import BaseModel
 
 
-class EventTypeEnum(enum.Enum):
+class EventTypeEnum(str, Enum):
     concert = "concert"
     museum = "museum"
     exhibition = "exhibition"

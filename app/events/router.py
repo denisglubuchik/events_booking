@@ -45,5 +45,5 @@ async def create_event(event: SEvents, user: User = Depends(current_user)):
         event_type=event.event_type,
         price=event.price,
         date=event.date,
-        people_amount=event.people_amount
+        people_amount=event.people_amount,
     )
