@@ -3,8 +3,7 @@
 {% block content %}
     {% for event in events %}
         <div>
-            {{ event.title }}
-            {{ event.description }}
+            <a href="{{ url_for('get_event_page', event_id=event.id) }}">{{ event.title }}</a>
         </div>
     {% endfor %}
 {% endblock %}

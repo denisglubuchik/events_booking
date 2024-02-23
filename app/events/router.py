@@ -30,6 +30,12 @@ async def get_events_by_location(location: str, event_type: EventTypeEnum = None
     return events
 
 
+@router.get("/event/{event_id}")
+async def get_event(event_id: int) -> SEvents:
+    event = await EventsDAO.find_by_id(model_id=event_id)
+    return event
+
+
 @router.post("")
 async def create_event(event: SEvents, user: User = Depends(current_user)):
     await EventsDAO.insert(

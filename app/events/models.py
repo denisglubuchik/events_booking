@@ -10,7 +10,7 @@ class Events(Base):
     title = Column(String, nullable=False)
     description = Column(String)
     location = Column(String, nullable=False)
-    event_type = Column(Enum(EventTypeEnum), nullable=False)
+    event_type = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
     people_amount = Column(Integer, nullable=False)
