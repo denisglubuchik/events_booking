@@ -30,3 +30,12 @@ async def get_tickets_page(
 ):
     return templates.TemplateResponse("tickets/tickets.html", {"request": request, "tickets": tickets, "user": user})
 
+
+@router.get("/login")
+async def get_login_page(request: Request):
+    return templates.TemplateResponse("auth/login.html", {"request": request})
+
+
+@router.get("/register")
+async def get_register_page(request: Request):
+    return templates.TemplateResponse("auth/register.html", {"request": request})

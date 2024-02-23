@@ -2,7 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        async function logoutUser() {
+            const url = "http://localhost:8000/users/auth/logout";
+
+            await fetch(url, {
+                method: 'POST',
+            }).then(response => {
+                if (response.status === 204) {
+                    window.location.href = "events"
+                }
+            });
+        }
+    </script>
     <title>Events Booking</title>
+    {% block head %}{% endblock %}
 </head>
 <body>
     <nav>
@@ -11,10 +25,12 @@
         </ul>
         <ul>
             {% if user %}
-                <li><a href="tickets">Мои билеты</a></li>
-                <li><a href="logout">Выйти</a></li>
+                 <li><a href="tickets">Мои билеты</a></li>
+                 <li>
+                    <button onclick="logoutUser()">Выйти</button>
+                 </li>
             {% else %}
-                <li><a href="pages/login">Войти</a></li>
+                 <li><a href="login">Войти</a></li>
             {% endif %}
         </ul>
     </nav>
